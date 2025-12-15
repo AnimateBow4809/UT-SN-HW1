@@ -122,49 +122,20 @@ N\left( {\begin{array}{*{20}{c}}
 	}
 \end{subquestion}
 
-\begin{subquestion}{What is the action?}
-	\answer{In this question we define the action as choosing which one of the offers to make to the customer   }
-\end{subquestion}
-
-\begin{subquestion}{How should the ’reward’ be defined? (Hint: It must represent the net economic value of an action.
-		Consider both the value of keeping a customer and the cost of the specific offer.)}
-		
-\answer{
-	We now model the reward as a mixed Bernoulli–Normal process to better reflect realistic variability in the economic outcome of a successful retention. 
-	
-	For each action $i$, let $p_i$ denote the probability that the customer is retained (success), and $c_i$ the cost of the offer.  
-	If the customer is retained, the reward follows a Normal distribution centered around the net gain $(300 - c_i)$, while failure (customer churn) yields a small fixed loss.  
-	
-	Formally,
+\begin{subquestion}{Show that when $p > 0$ , the overall clustering coefficient is given by:
 	\begin{equation}
-		r_i =
-		\begin{cases}
-			\mathcal{N}(\mu_i, \sigma_i^2), & \text{with probability } p_i \text{ (success / retained)}, \\[6pt]
-			v_i, & \text{with probability } 1 - p_i \text{ (failure / churn)},
-		\end{cases}
-		  \label{eq:one}
-	\end{equation}
-	where typically $\mu_i = 300 - c_i$, $\sigma_i^2$ represents variability in customer value, and $v_i$ is a small negative penalty stated in the question as $-5$.
-	
-	The expected reward for action $i$ is then
+C(p) \approx \frac{{3(k - 2)}}{{4(k - 1)}}{(1 - p)^3}
+		\end{equation}}
+	\answer{In this question we refer back to equation \ref{formula:gc} since the degree of nodes isn't dependent on  $p$ the number of connected triples will not change with changing $p$  the only thing that will change is the number of triangles for that case we can make an induction that the number of triangles we have at $p=0$ called $t(0)$ will survive in $p=p_1$ with probability that all 3 triangles edges survive thus $t(p)=t(0)(1-p) ^3$ and for the global clustering coefficient we reach equation \ref{formula:cof}:
 	\begin{equation}
-		\mathbb{E}[r_i] = p_i \, \mu_i + (1 - p_i) \, v_i.
-	\end{equation}
-	
-	This formulation corresponds to our \texttt{CustomBernoulliEnvironment}, where the Bernoulli component models customer retention probability and the Normal component captures the economic uncertainty of a successful retention.
-}
+		\label{formula:cof}
+		C(p) \approx C(0){(1 - p)^3} = \frac{{3(k - 2)}}{{4(k - 1)}}{(1 - p)^3}
+		\end{equation}    }
 \end{subquestion}
+\end{question}
 
-\begin{subquestion}{What is the overall goal that the agent is trying to achieve during its 1,000 actions?}
-	\answer{
-		In this task, the agent's goal is to maximize the cumulative expected reward (total profit).  
-		Let $r_i$ denote the reward at the $i$th iteration. Then the objective can be written as
-		\begin{equation}
-			\text{Maximize} \quad \sum_{i=1}^{1000} r_i
-		\end{equation}
-	}
-\end{subquestion}
-
+\begin{question}
+	content...
 \end{question}
 
 \end{document}
