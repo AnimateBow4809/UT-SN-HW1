@@ -82,7 +82,44 @@ N\left( {\begin{array}{*{20}{c}}
 		2 
 \end{array}} \right)
 		\end{equation}
-		}
+		for the number of triangles for each node we need to consider 2 cases:
+		\begin{enumerate}
+			\item  where the node has triangles with only one side of its connections so the number of triangles 
+			is given by \ref{formula:halftri}
+			\begin{equation}
+				\label{formula:halftri}
+				\left( {\begin{array}{*{20}{c}}
+						{\frac{{\langle k\rangle }}{2}} \\ 
+						2 
+				\end{array}} \right) + \left( {\begin{array}{*{20}{c}}
+						{\frac{{\langle k\rangle }}{2}} \\ 
+						2 
+				\end{array}} \right)
+			\end{equation}
+			\item  where each node has triangles with one node on one side and the other on another side the number of triangles os given by \ref{formula:fulltri}
+			\begin{equation}
+				\label{formula:fulltri}				
+				0 + 1 + 2 + 3 + 4 + ... + \frac{{\langle k\rangle }}{2} - 1 = \frac{{(1 + \frac{{\langle k\rangle }}{2} - 1)(\frac{{\langle k\rangle }}{2} - 1)}}{2} = \left( {\begin{array}{*{20}{c}}
+						{\frac{{\langle k\rangle }}{2}} \\ 
+						2 
+				\end{array}} \right)
+			\end{equation}
+		\end{enumerate}
+		When we sum the results from equation \ref{formula:halftri},\ref{formula:fulltri} we are given 3 times the number of triangles so for the actual number of triangles we need to divide by 3 putting all of this together with equation \ref{formula:trip} we get equation \ref{formula:gc2}
+		\begin{equation}
+			\label{formula:gc2}			
+			\begin{gathered}
+				C(0) = \frac{{3(\frac{{3N\left( {\begin{array}{*{20}{c}}
+										{\frac{{\langle k\rangle }}{2}} \\ 
+										2 
+								\end{array}} \right)}}{3})}}{{N\left( {\begin{array}{*{20}{c}}
+								{\langle k\rangle } \\ 
+								2 
+						\end{array}} \right)}} = \frac{{3\frac{{(\frac{{\langle k\rangle }}{2})(\frac{{\langle k\rangle }}{2} - 1)}}{2}}}{{\frac{{\langle k\rangle (\langle k\rangle  - 1)}}{2}}} = \frac{{3(\frac{{\langle k\rangle }}{2})(\frac{{\langle k\rangle }}{2} - 1)}}{{\langle k\rangle (\langle k\rangle  - 1)}} = \frac{{\frac{3}{4}(\langle k\rangle )(\langle k\rangle  - 2)}}{{\langle k\rangle (\langle k\rangle  - 1)}} \hfill \\
+				\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; = \frac{{3(\langle k\rangle  - 2)}}{{4(\langle k\rangle  - 1)}} \hfill \\ 
+			\end{gathered} 
+		\end{equation}
+	}
 \end{subquestion}
 
 \begin{subquestion}{What is the action?}
