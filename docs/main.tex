@@ -135,7 +135,50 @@ C(p) \approx \frac{{3(k - 2)}}{{4(k - 1)}}{(1 - p)^3}
 \end{question}
 
 \begin{question}
-	content...
+\questiontext{Snobbish Network}
+\begin{subquestion}{For a very large, snobbish network where $p >> q $, determine the minimal values for p and
+		q (each in terms of N ) required to ensure global connectivity.}
+		\answer{
+			Since $p >> q $ we have to first connect each community individually and than make atleast 1 connection 
+			between the 2 communities for the first part we know from lecture notes that $p > \frac{{\ln N}}{N}$ is sufficient condition for connectivity in each of the communities for there to be atleast 1 connection between the 2 communities  we follow equation \ref{formula:connectivity}
+			\begin{equation}
+			\label{formula:connectivity}
+			\begin{gathered}
+				possible\;edges = {N^2} \hfill \\
+				p(No\;Edges) = {(1 - q)^{{N^2}}} = {[{(1 - q)^{\frac{1}{q}}}]^{q{N^2}}}\xrightarrow{{p \gg q}} \approx {[{e^{ - 1}}]^{q{N^2}}} = {e^{ - q{N^2}}} \hfill \\
+				q{N^2} \geqslant \ln N \to q \geqslant \frac{{\ln N}}{{{N^2}}},p \geqslant \frac{{\ln N}}{N} \hfill \\ 
+			\end{gathered} 
+			\end{equation}
+		}
+\end{subquestion}
+\begin{subquestion}{What is the expected scaling of the average shortest path length $⟨d_{same}⟩$ between
+		two nodes of the same color?}
+	\answer{ from the lecture notes we know that equation \ref{formula:davg} holds:
+		\begin{equation}
+			\label{formula:davg}
+			\langle {d_{same}}\rangle  = \frac{{\ln N}}{{\ln \langle k\rangle }} = \frac{{\ln N}}{{\ln Np}} = \frac{{\ln N}}{{\ln N\frac{{\ln N}}{N}}} = \frac{{\ln N}}{{\ln \ln N}}
+		\end{equation}
+	}
+\end{subquestion}
+
+\begin{subquestion}{What is the expected scaling of the average shortest path length $⟨d_{diff} ⟩$ between
+		two nodes of different colors?}
+	\answer{
+		from equation \ref{formula:davg} we know the average distances between 2 nodes of the same color so for the distance between nodes of different colors we first need to get to bridge nodes and from there go to the destination node the total distance is given by equation \ref{formula:ddiff}
+		\begin{equation}
+			\label{formula:ddiff}			
+			\langle {d_{diff}}\rangle  = \langle {d_{same}}\rangle  + 1 + \langle {d_{same}}\rangle  = 2\langle {d_{same}}\rangle  + 1 = \frac{{2\ln N + \ln \ln N}}{{\ln \ln N}} = O(\frac{{\ln N}}{{\ln \ln N}})
+		\end{equation}
+	}
+\end{subquestion}
+
+\begin{subquestion}{Based on your answers, does this network model exhibit the small-world property?1
+		Justify your answer by explaining how this model does (or does not) satisfy the two
+		key characteristics of small-world networks (path length and clustering).}
+	\answer{
+		The average distance between nodes scales logarithmically so it has the short path property of small world networks but since it is also a random network it does not have a high clustering coefficient but by definition and lecture notes small world networks don't need to have a high clustering coefficient(unless we are looking for ultra small world property)  so this network is a small world network given that it is connected
+	}
+\end{subquestion}
 \end{question}
 
 \end{document}
