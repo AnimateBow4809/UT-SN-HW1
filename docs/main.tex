@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleese Assignment (For Students)
+% LaTeX Template
+% Version 2.0 (27/5/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{float}  
+\usepackage{subcaption}
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{Social Networks} % Course/class
+\newcommand{\assignmentTitle}{Assignment\ \#1} % Assignment title or name
+\newcommand{\assignmentAuthorName}{Ali Dashtbozorg 810104302} % Student name
+
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{Dr. Masoud Asadpour 15:00am} % Intructor name/time/description
+\newcommand{\assignmentDueDate}{Monday,\ December\ 15,\ 2025} % Due date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 1
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+\questiontext{The Watts-Strogatz Model}
+ 
+
+\begin{subquestion}{Consider the small-world model of Watts and Strogatz with rewiring probability p . The
+		model starts with a regular ring lattice where each node is connected to its ⟨k⟩ / 2 neigh-
+		bors on either side for a total degree of ⟨k⟩ .1 Show that when p = 0 , the overall clustering
+		coefficient of this graph is given by: \\
+		\begin{equation}
+			C(0) = \frac{{3(k - 2)}}{{4(k - 1)}}
+	\end{equation}}
+	\answer{
+		We know that the global clustering coefficient is given by equation \ref{formula:gc}:
+		\begin{equation}
+			\label{formula:gc}
+			C = \frac{3 \times \text{number of triangles}}{\text{number of connected triples of vertices}}
+		\end{equation} 
+		we know that for the WS model the number of connected triples of vertices is just N times the number of triplets each node gives which is given by equation \ref{formula:trip}:
+		\begin{equation}
+			\label{formula:trip}
+N\left( {\begin{array}{*{20}{c}}
+		{\langle k\rangle } \\ 
+		2 
+\end{array}} \right)
+		\end{equation}
+		}
+\end{subquestion}
+
+\begin{subquestion}{What is the action?}
+	\answer{In this question we define the action as choosing which one of the offers to make to the customer   }
+\end{subquestion}
+
+\begin{subquestion}{How should the ’reward’ be defined? (Hint: It must represent the net economic value of an action.
+		Consider both the value of keeping a customer and the cost of the specific offer.)}
+		
+\answer{
+	We now model the reward as a mixed Bernoulli–Normal process to better reflect realistic variability in the economic outcome of a successful retention. 
+	
+	For each action $i$, let $p_i$ denote the probability that the customer is retained (success), and $c_i$ the cost of the offer.  
+	If the customer is retained, the reward follows a Normal distribution centered around the net gain $(300 - c_i)$, while failure (customer churn) yields a small fixed loss.  
+	
+	Formally,
+	\begin{equation}
+		r_i =
+		\begin{cases}
+			\mathcal{N}(\mu_i, \sigma_i^2), & \text{with probability } p_i \text{ (success / retained)}, \\[6pt]
+			v_i, & \text{with probability } 1 - p_i \text{ (failure / churn)},
+		\end{cases}
+		  \label{eq:one}
+	\end{equation}
+	where typically $\mu_i = 300 - c_i$, $\sigma_i^2$ represents variability in customer value, and $v_i$ is a small negative penalty stated in the question as $-5$.
+	
+	The expected reward for action $i$ is then
+	\begin{equation}
+		\mathbb{E}[r_i] = p_i \, \mu_i + (1 - p_i) \, v_i.
+	\end{equation}
+	
+	This formulation corresponds to our \texttt{CustomBernoulliEnvironment}, where the Bernoulli component models customer retention probability and the Normal component captures the economic uncertainty of a successful retention.
+}
+\end{subquestion}
+
+\begin{subquestion}{What is the overall goal that the agent is trying to achieve during its 1,000 actions?}
+	\answer{
+		In this task, the agent's goal is to maximize the cumulative expected reward (total profit).  
+		Let $r_i$ denote the reward at the $i$th iteration. Then the objective can be written as
+		\begin{equation}
+			\text{Maximize} \quad \sum_{i=1}^{1000} r_i
+		\end{equation}
+	}
+\end{subquestion}
+
+\end{question}
+
+\end{document}
