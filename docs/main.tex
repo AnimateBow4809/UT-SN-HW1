@@ -216,5 +216,72 @@ in a regular lattice nodes are connected only to nearby neighbors so reaching di
 }
 \end{subquestion}
 \end{question}
-
+\begin{question}
+	\questiontext{Generative Graph Models \& Genetic Encodings}\\
+\begin{subquestion}{Deterministic Construction of Scale-Free Networks}
+	\begin{enumerate}
+		\item Examine the Adjacency Matrix plot. Explain how the recursive, block-like structure
+		visually represents the hierarchical nature of the hubs.
+		\answer{
+			the adjacency matrix spy plot given in figure \ref{fig:q3_adj_plot} for \( b=10 \) reveals a highly structured non random pattern dominated by pronounced vertical stripes concentrated near the top rows which directly reflects the hierarchical hub structure induced by the genetic wiring rules The dense vertical columns correspond to destination nodes whose binary addresses end with long suffixes of ones causing them to receive edges from exponentially many source patterns and thus become high in degree hubs. The varying stripe depths and their recursive spacing encode the successive application of wiring rules at different scales visually demonstrating how hubs emerge deterministically and hierarchically from shared genetic prefixes and suffixes rather than from random attachment.
+		}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth,keepaspectratio]
+			{imgs/q3_adj_plot.png}
+			\caption{the adjacency matrix of the network showing how rules effect the distribution of degrees.}
+			\label{fig:q3_adj_plot}
+		\end{figure}
+	
+		\item In standard Barabasi–Albert models, $\gamma  \approx 3$ . However, this deterministic method
+		produces a different exponent. Does your estimated $\gamma$ converge closer to $\gamma  \approx 1$
+		(slope of -1)? Explain why this specific bit-matching heuristic creates such an extreme ”winner-takes-all” topology.
+		\answer{
+		in this deterministic genetic construction, the estimated power-law exponent ($\gamma$) indeed converges toward values close to $\gamma \approx 1$ (corresponding to a slope of approximately $-1$ on a log--log plot) rather than the $\gamma \approx 3$ characteristic of the Barab\'asi--Albert model. This occurs because the bit-matching heuristic creates a highly uneven allocation of edges nodes whose binary addresses end with long runs of ones match a large number of destination patterns ($D_i$), while nodes with many leading zeros participate in multiple source patterns ($S_i$) As a result a small subset of nodes is deterministically selected by many wiring rules across all hierarchical scales accumulating edges exponentially faster than the rest. Unlike preferential attachment, where degree grows proportionally to existing degree through stochastic growth, this model encodes preference directly into the address space, effectively collapsing attachment probability onto a few genetically privileged nodes. This produces an extreme ``winner-takes-all'' topology, where hubs dominate the network and the degree distribution becomes much heavier-tailed, driving the exponent toward $\gamma \approx 1$.
+		
+		Empirical evidence for this behavior is shown in two loglog plots. Figure~\ref{fig:q3_out_plot} presents the out-degree distribution together with its fitted line, while Figure~\ref{fig:q3_in_plot} shows the corresponding in-degree distribution and fit. In both cases, the fitted slope is $\gamma = -0.95$, and the linear fit is effectively perfect, confirming that both the in-degree and out-degree distributions follow the same heavy-tailed scaling with an exponent very close to $-1$.
+		}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth,keepaspectratio]
+			{imgs/q3_out_plot.png}
+			\caption{the out degree plot for the generated network showing both the data and how a line with slope $-0.95$ perfectly fits the data.}
+			\label{fig:q3_out_plot}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth,keepaspectratio]
+			{imgs/q3_in_plot.png}
+			\caption{the in degree plot for the generated network showing both the data and how a line with slope $-0.95$ perfectly fits the data.}
+			\label{fig:q3_in_plot}
+		\end{figure}
+	\end{enumerate}
+\end{subquestion}
+\begin{subquestion}{The Random Genetic (RG) Model \& Parameter Space}
+	\begin{enumerate}
+		\item  The theoretical density is given by$\rho = 1 - (1 - \pi^2)^{2r}, \quad \text{with } \pi = 2^{x-b}$ Compare
+		your simulation results with this formula. Does the density grow linearly with r , or
+		does it saturate?
+		\answer{
+			The simulation results closely follow the theoretical prediction
+			\[
+			\rho = 1 - (1 - \pi^2)^{2r}, \quad \text{with } \pi = 2^{x-b},
+			\]
+			confirming that edge formation in the RG model is well captured by independent rule coverage probabilities. This agreement is visually reinforced by the heatmap plot in Figure~\ref{fig:q3_dense_plot}, which compares simulated versus theoretical densities and shows that the two are almost identical and exhibit the same behavior. For small $r$, the density initially grows approximately linearly, since each newly added rule is unlikely to overlap with previous ones and thus contributes many new edges. However, as $r$ increases, the growth becomes sublinear and eventually saturates toward $\rho \to 1$. This saturation occurs because the probability that a potential edge has already been created by at least one previous rule increases rapidly with $r$, especially for larger $x$ where each rule already covers a large fraction of the node space. Therefore, the density does not grow indefinitely with the number of rules but instead exhibits a clear saturation regime, in strong agreement with the theoretical formula.
+		}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.85\textwidth,keepaspectratio]
+			{imgs/q3_dense_plot.png}
+			\caption{The heatmap plot for network density for both theoretical density and simulated density which shows they are aligned,similar and both saturate}
+			\label{fig:q3_dense_plot}
+		\end{figure}
+		\item Explain the concept of ”Rule Overlap.” Why does adding more rules eventually
+		yield diminishing returns in terms of new edges created?
+		\answer{
+		Rule overlap refers to the phenomenon where multiple genetic wiring rules generate the same edges between node pairs as the number of rules increases, especially when the number of wildcards $x$ is large, each rule matches a substantial fraction of nodes, making overlaps increasingly likely. Consequently, newly added rules tend to recreate edges that already exist rather than introduce novel connections. This leads to diminishing returns although rules are added linearly the number of new edges added per rule decreases rapidly In the extreme case once most node pairs are already connected, additional rules contribute almost no new edges at all Rule overlap is therefore the fundamental mechanism driving density saturation in the RG model and explains why increasing $r$ beyond a certain point no longer significantly alters the network structure.
+		}
+	\end{enumerate}
+\end{subquestion}
+\end{question}
 \end{document}
