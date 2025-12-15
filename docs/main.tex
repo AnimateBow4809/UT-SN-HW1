@@ -181,4 +181,40 @@ C(p) \approx \frac{{3(k - 2)}}{{4(k - 1)}}{(1 - p)^3}
 \end{subquestion}
 \end{question}
 
+\begin{question}
+\questiontext{Small World Phenomena in Random Networks}\\
+The code for generating the graphs and calculating the shortest path is provided in Helpers section and uses igraph package
+\begin{subquestion}{Network Construction and Simulation}
+\answer{
+		in figure \ref{fig:q2_initial_plot} we have visualized the results for average shortest path which correspond to our theory where 1d lattice have significantly higher shortest path compared to the rest and random networks which have small world property have lower shortest path compared to the rest
+}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth,keepaspectratio]
+	{imgs/q2_initial_plot.png}
+	\caption{linear plot and log-log plot scaling of average path length ⟨d⟩ vs network size N for Lattices and Random
+		Networks..}
+	\label{fig:q2_initial_plot}
+\end{figure}
+\end{subquestion}
+\begin{subquestion}{Scaling Analysis}
+	\answer{
+		in figure \ref{fig:q2_second_plot} we  computed the slope derived from our data and it almost is perfect when compared to our theory the only reason theory differs from our data is because when we are talking about scale of the shortest path we don't include coefficient behind it so actually for a 2d lattice it would be $\langle d\rangle  \sim a{N^{\frac{1}{2}}}$ if we were to include $a$ than our theory and simulations would align perfectly
+		and as shown on the graph our simulated exponents match the theoretical dimensionality
+	}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth,keepaspectratio]
+		{imgs/q2_second_plot.png}
+		\caption{comparing simulation results with the theoretical predictions shown in the lecture slide.}
+		\label{fig:q2_second_plot}
+	\end{figure}
+\end{subquestion}
+\begin{subquestion}{Explain why the Random Network follows a logarithmic scaling while lattices follow a polynomial scaling. What structural feature of the Random Network (often referred to as “shortcuts”) is responsible for this drastic reduction in path length?}
+\answer{
+in a regular lattice nodes are connected only to nearby neighbors so reaching distant nodes requires traversing space step by step causing the typical shortest path length to grow as a power of the system size $N$ (specifically $\ell \sim N^{1/d}$ in $d$ dimensions) In contrast a random network contains long range connections often called shortcuts that link nodes which are far apart in the underlying structure. These shortcuts allow the number of reachable nodes to grow exponentially with the number of steps, so the entire network can be reached in a number of steps that scales logarithmically with $N$ ($\langle d\rangle \sim \log N$). The presence of these shortcuts is therefore the key structural feature responsible for the drastic reduction in average path length in random networks.
+}
+\end{subquestion}
+\end{question}
+
 \end{document}
